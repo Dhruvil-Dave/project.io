@@ -1,0 +1,596 @@
+<html>
+<head>
+<title>Coronavirus</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<style type="text/css">
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:linear-gradient(#b92b27, #1565C0); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+
+//  background:yellow; 
+}
+
+#left_navbar{
+width:97px;
+height:100vh;
+position:fixed;
+background-color:rgb(30,30,48);
+margin-left:-10px;
+margin-top:-45px;
+display:none;
+}
+body{
+background-color:rgb(22,22,37);
+font-family:cursive;
+}
+.content{
+margin-top:5px;
+}
+i{
+margin-top:20px;
+cursor:pointer;
+}
+mark{
+background-color:rgb(225,48,40);
+color:red;
+}
+.search{
+width:500px;
+height:55px;
+border:1px solid black;
+margin-left:105px;
+margin-top:40px;
+letter-spacing:1px;
+background-color:rgb(30,30,48);
+border-radius:7px;
+box-shadow: 0 0 10px;
+color:grey;
+}
+#demo{
+font-size:13px;
+margin-left:115px;
+margin-top:-37px;
+}
+button{
+margin-left:310px;
+}
+#content{
+	font-family:Helvetica;
+	margin-top:100px;
+	margin-left:50px;
+	height:210px;
+	display:flex;
+	}
+	.inline{
+	height: 30vh;
+	}
+	#confirmed:hover{
+	background-color:rgba(255,0,0,0.2);
+	width:13%;
+	}
+	#confirmed{
+	color:rgb(254,7,58);
+	margin:0 0 0 40px;
+	width:18%;
+	text-align:center;
+	transition-duration:.5s;
+	border-radius:20px;
+	}
+	#active:hover{
+	background-color:rgba(0,123,254,0.2);
+	width:13%;
+	}
+	#active{
+	color:rgb(0,123,254);
+	width:18%;
+	text-align:center;
+	transition-duration:.5s;
+	border-radius:20px;
+	}
+	#recovered:hover{
+	background-color:rgba(40,166,69,0.2);
+	width:13%;
+	}
+	#recovered{
+	color:rgb(40,166,69);
+	width:18%;
+	text-align:center;
+	transition-duration:.5s;
+	border-radius:20px;
+	}
+	#deceased:hover{
+	background-color:rgba(108,117,125,0.2);
+	width:13%;
+	}
+	#deceased{
+	color:rgb(108,117,125);
+	width:18%;
+	text-align:center;
+	transition-duration:.5s;
+	border-radius:20px;
+	}
+	h5{
+	margin-top:15px;
+	}
+	.cases{
+	position:relative;
+	font-size:11px;
+	margin-top:-11px;
+	margin-left:-5px;
+	}
+	.value{
+	font-size:25px;
+	margin-top:43px;
+	font-weight:bolder;
+	}
+.table{
+  width:93%;
+  margin-top:20px;
+  margin-left: 7%;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (min-width: 601px) {
+  table {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 600px) {
+  table {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 601px) {
+   #confirmed:hover{
+	background-color:rgba(255,0,0,0.2);
+	width:20%;
+	}
+	#deceased:hover{
+	background-color:rgba(108,117,125,0.2);
+	width:18%;
+	}
+	#recovered:hover{
+	background-color:rgba(40,166,69,0.2);
+	width:18%;
+	}
+	#active:hover{
+	background-color:rgba(0,123,254,0.2);
+	width:18%;
+	}
+	}
+	
+.table{
+width:50%;
+color:white;
+}
+TABLE A{
+color:white;
+}
+table a:hover{
+color:#03DAC5;
+}
+</style>
+</head>
+<body>
+<i id="navigation" class="fa fa-bars fa-2x" aria-hidden="true" style="margin:10px 0 0 10px;color:white"></i>
+<div id="left_navbar">
+<div class="content" align="center">
+<i class="fa fa-times fa-2x" aria-hidden="true" onclick="leftBar()" style="color:grey"></i>
+<p style="font-weight:bold;color:grey">COVID19</p>
+<p style="font-size:9px;margin-top:-7px;color:rgb(65,97,197);font-weight:bold">INDIA</p>
+<p><i style="color:grey" class="fa fa-home fa-2x" aria-hidden="true"></i>
+</p>
+<p>
+<i style="color:grey" class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+</p>
+<p>
+<i style="color:rgb(255,193,7)" class="fa fa-sun-o fa-2x" aria-hidden="true"></i>
+</p>
+</div>
+</div>
+<div style="margin-left:85px;margin-top:20px">
+<p style="margin-left:250px;margin-top:25px;letter-spacing:1px;color:grey;font-size:12px;">Search your district or state</p>
+<button onclick="typeWriter()">Animate</button>
+<div><input class="search"><p id="demo" style="color:white"></p></div>
+<div style="margin-left:750px;margin-top:-150px;">
+<p style="font-size:25px;color:rgb(225,48,40)">India</p>
+<p style="font-size:15px;color:grey;margin-top:-18px;">Last Updated on 29 July , 9:14PM</p>
+<div style="margin-left:400px;">
+<p style="width:120px;color:rgb(109,86,139);font-size:20px;text-align:right;margin-top:-78px;"><span style="font-size:16px;">Tested </span><span style="font-weight:bolder">1,77,43,740 </span><span style="font-size:13px;">As of 28 July per source</span></p>
+</div>
+</div>
+</div>
+           <div id="content" class="inline">
+		<div id="confirmed">
+			<h5>Confirmed</h5>
+			<p class="cases">+cases</p>
+			<p class="value count">2764092</p>
+		</div>
+		<div id="active">
+			<h5>Active</h5>
+			<p class="cases">+cases</p>
+			<p class="value count">675417</p>
+		</div>
+		<div id="recovered">
+			<h5>Recovered</h5>
+			<p class="cases">+cases</p>
+			<p class="value count">2035143</p>
+		</div>
+		<div id="deceased">
+			<h5>Deceased</h5>
+			<p class="cases">+cases</p>
+			<p class="value count">53018</p>
+		</div>
+		</div>
+	<div class="myTable">
+          <table class="table table-striped table-bordered">
+          <thead  style="font-size:2.3vw">
+              <tr>
+                  <th>State/UT</th>
+                  <th>Confirmed</th>
+                  <th>Active</th>
+                  <th>Recovered</th>
+                  <th>Deceased</th>
+                  <th>Tested</th>
+              </tr>
+          </thead>
+          <tbody style="font-size:1.8vw">
+              <tr>
+                  <td class="filterable-cell"><a href="">Maharashtra</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Tamil Nadu</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Andhra Pradesh</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Karnataka</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Uttar Pradesh</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Delhi</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">West Bengal</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Bihar</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Telangana</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Gujarat</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Assam</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Odisha</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Rajasthan</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Haryana</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Madhya Pradesh</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Kerala</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Punjab</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Jammu and Kashmir</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Jharkhand</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Chhattisgarh</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Uttarakhand</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Goa</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Puducherry</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Tripura</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Manipur</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Himachal Pradesh</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Nagaland</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Arunachal Pradesh</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Andaman and Nicobar Islands</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Chandigarh</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Ladakh</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Dadra and Nagar Haveli and Daman and Diu</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Meghalaya</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Sikkim</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">Mizoram</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+              <tr>
+                  <td class="filterable-cell"><a href="">India</a></td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+                  <td class="filterable-cell">0</td>
+              </tr>
+          </tbody>
+      </table>
+      </div>
+      </div>
+	
+	
+	
+	
+	<script type="text/javascript">
+	$("#navigation").mouseenter(function(){
+		$("#left_navbar").fadeIn(1000,function(){
+	var x=document.getElementById("left_navbar");
+	if(x.style.display == "none"){
+	x.style.display= "block";
+	}
+	});
+	});
+	
+	function leftBar(){
+		$("#left_navbar").fadeOut(1000,function(){
+	var y = document.getElementById("left_navbar");
+	if(y.style.display == "block"){
+	y.style.display = "none";
+	}
+	});
+	}
+	var i=0;
+	var txt='Maharashtra , Delhi , Tamil Nadu';
+	var speed = 100;
+	function typeWriter(){
+	if (i < txt.length) {
+		document.getElementById("demo").innerHTML += txt.charAt(i);
+		i++;
+		setTimeout(typeWriter, speed);
+		}
+	}	
+$('.count').each(function () {
+    $(this).prop('Counter',0).animate({
+        Counter: $(this).text()
+    }, {
+        duration: 4000,
+        easing: 'swing',
+        step: function (now) {
+            $(this).text(Math.ceil(now));
+        }
+    });
+});                                                          
+	</script>
+<script src="https://use.fontawesome.com/a73e2c8479.js"></script>
+</body>
+</html>
